@@ -1,4 +1,4 @@
-﻿namespace egm_move
+﻿namespace egm_move1
 {
     partial class Form1
     {
@@ -31,17 +31,17 @@
             this.components = new System.ComponentModel.Container();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
-            this.trackBar2 = new System.Windows.Forms.TrackBar();
-            this.trackBar3 = new System.Windows.Forms.TrackBar();
-            this.trackBar4 = new System.Windows.Forms.TrackBar();
-            this.trackBar5 = new System.Windows.Forms.TrackBar();
-            this.trackBar6 = new System.Windows.Forms.TrackBar();
+            this.XBar = new System.Windows.Forms.TrackBar();
+            this.YBar = new System.Windows.Forms.TrackBar();
+            this.ZBar = new System.Windows.Forms.TrackBar();
+            this.RollBar = new System.Windows.Forms.TrackBar();
+            this.PitchBar = new System.Windows.Forms.TrackBar();
+            this.YawBar = new System.Windows.Forms.TrackBar();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -49,30 +49,26 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.退出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.trackBar7 = new System.Windows.Forms.TrackBar();
+            this.LBar = new System.Windows.Forms.TrackBar();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
-            this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.XBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.YBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ZBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RollBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PitchBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.YawBar)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LBar)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -83,78 +79,75 @@
             this.button1.TabIndex = 0;
             this.button1.Text = "启动";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.启动);
             // 
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(6, 20);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(119, 55);
+            this.textBox1.Size = new System.Drawing.Size(126, 46);
             this.textBox1.TabIndex = 2;
             // 
-            // trackBar1
+            // XBar
             // 
-            this.trackBar1.Location = new System.Drawing.Point(45, 30);
-            this.trackBar1.Maximum = 1080;
-            this.trackBar1.Minimum = -1080;
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(267, 45);
-            this.trackBar1.SmallChange = 5;
-            this.trackBar1.TabIndex = 3;
-            this.trackBar1.ValueChanged += new System.EventHandler(this.trackBar1_ValueChanged);
+            this.XBar.Location = new System.Drawing.Point(45, 30);
+            this.XBar.Maximum = 20;
+            this.XBar.Minimum = -20;
+            this.XBar.Name = "XBar";
+            this.XBar.Size = new System.Drawing.Size(297, 45);
+            this.XBar.TabIndex = 3;
+            this.XBar.ValueChanged += new System.EventHandler(this.X轴运动);
             // 
-            // trackBar2
+            // YBar
             // 
-            this.trackBar2.Location = new System.Drawing.Point(47, 81);
-            this.trackBar2.Maximum = 1080;
-            this.trackBar2.Minimum = -1080;
-            this.trackBar2.Name = "trackBar2";
-            this.trackBar2.Size = new System.Drawing.Size(265, 45);
-            this.trackBar2.SmallChange = 5;
-            this.trackBar2.TabIndex = 4;
-            this.trackBar2.Scroll += new System.EventHandler(this.trackBar2_ValueChanged);
+            this.YBar.Location = new System.Drawing.Point(47, 81);
+            this.YBar.Maximum = 20;
+            this.YBar.Minimum = -20;
+            this.YBar.Name = "YBar";
+            this.YBar.Size = new System.Drawing.Size(295, 45);
+            this.YBar.TabIndex = 4;
+            this.YBar.ValueChanged += new System.EventHandler(this.Y轴运动);
             // 
-            // trackBar3
+            // ZBar
             // 
-            this.trackBar3.Location = new System.Drawing.Point(47, 132);
-            this.trackBar3.Maximum = 1080;
-            this.trackBar3.Minimum = -1080;
-            this.trackBar3.Name = "trackBar3";
-            this.trackBar3.Size = new System.Drawing.Size(265, 45);
-            this.trackBar3.SmallChange = 5;
-            this.trackBar3.TabIndex = 5;
-            this.trackBar3.Scroll += new System.EventHandler(this.trackBar3_ValueChanged);
+            this.ZBar.Location = new System.Drawing.Point(47, 132);
+            this.ZBar.Maximum = 20;
+            this.ZBar.Minimum = -20;
+            this.ZBar.Name = "ZBar";
+            this.ZBar.Size = new System.Drawing.Size(295, 45);
+            this.ZBar.TabIndex = 5;
+            this.ZBar.ValueChanged += new System.EventHandler(this.Z轴运动);
             // 
-            // trackBar4
+            // RollBar
             // 
-            this.trackBar4.Location = new System.Drawing.Point(47, 175);
-            this.trackBar4.Maximum = 15;
-            this.trackBar4.Minimum = -15;
-            this.trackBar4.Name = "trackBar4";
-            this.trackBar4.Size = new System.Drawing.Size(265, 45);
-            this.trackBar4.TabIndex = 6;
-            this.trackBar4.Scroll += new System.EventHandler(this.trackBar4_ValueChanged);
+            this.RollBar.Location = new System.Drawing.Point(47, 175);
+            this.RollBar.Maximum = 5;
+            this.RollBar.Minimum = -5;
+            this.RollBar.Name = "RollBar";
+            this.RollBar.Size = new System.Drawing.Size(295, 45);
+            this.RollBar.TabIndex = 6;
+            this.RollBar.ValueChanged += new System.EventHandler(this.滚转运动);
             // 
-            // trackBar5
+            // PitchBar
             // 
-            this.trackBar5.Location = new System.Drawing.Point(45, 226);
-            this.trackBar5.Maximum = 40;
-            this.trackBar5.Minimum = -40;
-            this.trackBar5.Name = "trackBar5";
-            this.trackBar5.Size = new System.Drawing.Size(267, 45);
-            this.trackBar5.TabIndex = 7;
-            this.trackBar5.Scroll += new System.EventHandler(this.trackBar5_ValueChanged);
+            this.PitchBar.Location = new System.Drawing.Point(45, 226);
+            this.PitchBar.Maximum = 5;
+            this.PitchBar.Minimum = -5;
+            this.PitchBar.Name = "PitchBar";
+            this.PitchBar.Size = new System.Drawing.Size(297, 45);
+            this.PitchBar.TabIndex = 7;
+            this.PitchBar.ValueChanged += new System.EventHandler(this.俯仰运动);
             // 
-            // trackBar6
+            // YawBar
             // 
-            this.trackBar6.Location = new System.Drawing.Point(47, 277);
-            this.trackBar6.Maximum = 15;
-            this.trackBar6.Minimum = -15;
-            this.trackBar6.Name = "trackBar6";
-            this.trackBar6.Size = new System.Drawing.Size(265, 45);
-            this.trackBar6.TabIndex = 8;
-            this.trackBar6.Scroll += new System.EventHandler(this.trackBar6_ValueChanged);
+            this.YawBar.Location = new System.Drawing.Point(47, 277);
+            this.YawBar.Maximum = 5;
+            this.YawBar.Minimum = -5;
+            this.YawBar.Name = "YawBar";
+            this.YawBar.Size = new System.Drawing.Size(295, 45);
+            this.YawBar.TabIndex = 8;
+            this.YawBar.ValueChanged += new System.EventHandler(this.偏航运动);
             // 
             // checkBox1
             // 
@@ -165,7 +158,7 @@
             this.checkBox1.TabIndex = 10;
             this.checkBox1.Text = "IRB4600";
             this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.选中IRB4600);
             // 
             // checkBox2
             // 
@@ -176,7 +169,7 @@
             this.checkBox2.TabIndex = 11;
             this.checkBox2.Text = "IRB6500S";
             this.checkBox2.UseVisualStyleBackColor = true;
-            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.选中IRB6650S);
             // 
             // button3
             // 
@@ -184,9 +177,9 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 12;
-            this.button3.Text = "停止运动";
+            this.button3.Text = "刹车";
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.button3.Click += new System.EventHandler(this.刹车);
             // 
             // button4
             // 
@@ -194,19 +187,19 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(86, 23);
             this.button4.TabIndex = 13;
-            this.button4.Text = "还原工作位置";
+            this.button4.Text = "工作位置";
             this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.button4.Click += new System.EventHandler(this.工作位置);
             // 
-            // button5
+            // button2
             // 
-            this.button5.Location = new System.Drawing.Point(115, 20);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(86, 23);
-            this.button5.TabIndex = 14;
-            this.button5.Text = "还原停机位置";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.button2.Location = new System.Drawing.Point(115, 20);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(86, 23);
+            this.button2.TabIndex = 14;
+            this.button2.Text = "停机位置";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.停机位置);
             // 
             // label1
             // 
@@ -264,44 +257,19 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(6, 20);
+            this.textBox2.Location = new System.Drawing.Point(5, 14);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(169, 55);
+            this.textBox2.Size = new System.Drawing.Size(114, 155);
             this.textBox2.TabIndex = 23;
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.设置ToolStripMenuItem,
-            this.退出ToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(352, 25);
-            this.menuStrip1.TabIndex = 32;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // 设置ToolStripMenuItem
-            // 
-            this.设置ToolStripMenuItem.Name = "设置ToolStripMenuItem";
-            this.设置ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
-            this.设置ToolStripMenuItem.Text = "设置";
-            this.设置ToolStripMenuItem.Click += new System.EventHandler(this.设置ToolStripMenuItem_Click_1);
-            // 
-            // 退出ToolStripMenuItem
-            // 
-            this.退出ToolStripMenuItem.Name = "退出ToolStripMenuItem";
-            this.退出ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
-            this.退出ToolStripMenuItem.Text = "退出";
-            this.退出ToolStripMenuItem.Click += new System.EventHandler(this.退出ToolStripMenuItem_Click_1);
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.checkBox1);
             this.groupBox1.Controls.Add(this.checkBox2);
-            this.groupBox1.Location = new System.Drawing.Point(12, 28);
+            this.groupBox1.Location = new System.Drawing.Point(8, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(90, 78);
+            this.groupBox1.Size = new System.Drawing.Size(81, 78);
             this.groupBox1.TabIndex = 33;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "控制模型";
@@ -310,11 +278,11 @@
             // 
             this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Controls.Add(this.button3);
-            this.groupBox2.Controls.Add(this.button5);
+            this.groupBox2.Controls.Add(this.button2);
             this.groupBox2.Controls.Add(this.button4);
-            this.groupBox2.Location = new System.Drawing.Point(108, 28);
+            this.groupBox2.Location = new System.Drawing.Point(8, 99);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(222, 78);
+            this.groupBox2.Size = new System.Drawing.Size(222, 88);
             this.groupBox2.TabIndex = 34;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "控制按钮";
@@ -322,9 +290,9 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.textBox1);
-            this.groupBox3.Location = new System.Drawing.Point(12, 112);
+            this.groupBox3.Location = new System.Drawing.Point(92, 12);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(131, 85);
+            this.groupBox3.Size = new System.Drawing.Size(138, 78);
             this.groupBox3.TabIndex = 35;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "提示信息";
@@ -332,9 +300,9 @@
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.textBox2);
-            this.groupBox4.Location = new System.Drawing.Point(149, 112);
+            this.groupBox4.Location = new System.Drawing.Point(236, 12);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(181, 85);
+            this.groupBox4.Size = new System.Drawing.Size(125, 175);
             this.groupBox4.TabIndex = 36;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "实时数据";
@@ -342,22 +310,22 @@
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.label7);
-            this.groupBox5.Controls.Add(this.trackBar7);
+            this.groupBox5.Controls.Add(this.LBar);
             this.groupBox5.Controls.Add(this.label1);
-            this.groupBox5.Controls.Add(this.trackBar1);
+            this.groupBox5.Controls.Add(this.XBar);
             this.groupBox5.Controls.Add(this.label2);
-            this.groupBox5.Controls.Add(this.trackBar2);
-            this.groupBox5.Controls.Add(this.trackBar3);
-            this.groupBox5.Controls.Add(this.trackBar6);
+            this.groupBox5.Controls.Add(this.YBar);
+            this.groupBox5.Controls.Add(this.ZBar);
+            this.groupBox5.Controls.Add(this.YawBar);
             this.groupBox5.Controls.Add(this.label6);
-            this.groupBox5.Controls.Add(this.trackBar5);
+            this.groupBox5.Controls.Add(this.PitchBar);
             this.groupBox5.Controls.Add(this.label3);
-            this.groupBox5.Controls.Add(this.trackBar4);
+            this.groupBox5.Controls.Add(this.RollBar);
             this.groupBox5.Controls.Add(this.label5);
             this.groupBox5.Controls.Add(this.label4);
-            this.groupBox5.Location = new System.Drawing.Point(12, 203);
+            this.groupBox5.Location = new System.Drawing.Point(14, 193);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(318, 379);
+            this.groupBox5.Size = new System.Drawing.Size(349, 365);
             this.groupBox5.TabIndex = 37;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "六自由度控制";
@@ -371,45 +339,43 @@
             this.label7.TabIndex = 22;
             this.label7.Text = "L";
             // 
-            // trackBar7
+            // LBar
             // 
-            this.trackBar7.Location = new System.Drawing.Point(45, 320);
-            this.trackBar7.Maximum = 2000;
-            this.trackBar7.Name = "trackBar7";
-            this.trackBar7.Size = new System.Drawing.Size(265, 45);
-            this.trackBar7.SmallChange = 5;
-            this.trackBar7.TabIndex = 21;
-            this.trackBar7.ValueChanged += new System.EventHandler(this.trackBar7_ValueChanged);
+            this.LBar.Location = new System.Drawing.Point(45, 320);
+            this.LBar.Maximum = 2000;
+            this.LBar.Name = "LBar";
+            this.LBar.Size = new System.Drawing.Size(265, 45);
+            this.LBar.SmallChange = 5;
+            this.LBar.TabIndex = 21;
+            this.LBar.ValueChanged += new System.EventHandler(this.加油杆长变化);
             // 
             // timer1
             // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.定期刷新状态);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.ClientSize = new System.Drawing.Size(352, 586);
+            this.ClientSize = new System.Drawing.Size(369, 580);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "飞机控制测试";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).EndInit();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.关闭窗口);
+            ((System.ComponentModel.ISupportInitialize)(this.XBar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.YBar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ZBar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RollBar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PitchBar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.YawBar)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -419,9 +385,8 @@
             this.groupBox4.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LBar)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -430,17 +395,17 @@
         #endregion
 
         private System.Windows.Forms.Button button1;
-        public System.Windows.Forms.TrackBar trackBar1;
-        public System.Windows.Forms.TrackBar trackBar2;
-        public System.Windows.Forms.TrackBar trackBar3;
-        public System.Windows.Forms.TrackBar trackBar4;
-        public System.Windows.Forms.TrackBar trackBar5;
-        public System.Windows.Forms.TrackBar trackBar6;
+        public System.Windows.Forms.TrackBar XBar;
+        public System.Windows.Forms.TrackBar YBar;
+        public System.Windows.Forms.TrackBar ZBar;
+        public System.Windows.Forms.TrackBar RollBar;
+        public System.Windows.Forms.TrackBar PitchBar;
+        public System.Windows.Forms.TrackBar YawBar;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button2;
         public System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
@@ -448,17 +413,14 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem 设置ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 退出ToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Label label7;
-        public System.Windows.Forms.TrackBar trackBar7;
+        public System.Windows.Forms.TrackBar LBar;
+        public System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Timer timer1;
     }
 }

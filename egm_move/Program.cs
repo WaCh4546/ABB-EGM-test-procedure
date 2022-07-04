@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace egm_move
+namespace egm_move1
 {
     static class Program
     {

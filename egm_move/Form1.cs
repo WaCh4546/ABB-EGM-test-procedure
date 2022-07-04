@@ -4,810 +4,726 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
-using System.ComponentModel;
-//using System.Threading.Tasks;
 using abb.egm;
-using JoyKeys.Voluntary;
 
-namespace egm_move
+namespace egm_move1
 {
     public partial class Form1 : Form
-    {
-        public Sensor s1;
-        public static Joystick joystick;
-        public static bool Set_position = false;
-        public static bool get_initial_position = true;
-        //4600机器人向固定位置（工作位置，停止位置）移动的速度设定
-        public static double set_movement_speed_position_4600=15;
-        public static double set_movement_speed_posture_4600=0.5;
-        public static double set_movement_speed_position_6650S=20;
-        public static double set_movement_speed_posture_6650S=0.5;
-
-        public static double Y_speed_4600 = 50;
-        public static double Z_speed_4600 = 50;
-        public static double Y_speed_6650S = 0.5;
-        public static double Z_speed_6650S = 0.5;
-        public static double L_speed = 30;
-
-        //4600机器人运动范围
-        public static int robot_4600range_x_max=0;
-        public static int robot_4600range_y_max = 1080;
-        public static int robot_4600range_z_max = 1900;
-        public static int robot_4600range_roll_max = 15;
-        public static int robot_4600range_pitch_max = 15;
-        public static int robot_4600range_yaw_max = 15;
-
-        public static int robot_4600range_x_min = 0;
-        public static int robot_4600range_y_min = -1080;
-        public static int robot_4600range_z_min = 1070;
-        public static int robot_4600range_roll_min = -15;
-        public static int robot_4600range_pitch_min = -15;
-        public static int robot_4600range_yaw_min = -15;
-
-        //6650S机器人运动范围
-        public static int robot_6650range_x_max = 3480;
-        public static int robot_6650range_y_max = 351;
-        public static int robot_6650range_z_max = 1201;
-        public static int robot_6650range_roll_max = 0;
-        public static int robot_6650range_pitch_max = 10;
-        public static int robot_6650range_yaw_max = 15;
-        public static int robot_6650range_L_max = 1000;
-
-        public static int robot_6650range_x_min = 1480;
-        public static int robot_6650range_y_min = -351;
-        public static int robot_6650range_z_min = -161;
-        public static int robot_6650range_roll_min = 0;
-        public static int robot_6650range_pitch_min = -10;
-        public static int robot_6650range_yaw_min = -15;
-        public static int robot_6650range_L_min = -1000;
-
-        //运动空间中心
-        public static double robot_set_x_4600=2120;
-        public static double robot_set_y_4600=0;
-        public static double robot_set_z_4600=520;
-        public static double robot_set_x_6650=2480;
-        public static double robot_set_y_6650=0;
-        public static double robot_set_z_6650=-240;
-
-
-        //由trackBar控制时 发送的运动量
-        public static double robot_send_x;
-        public static double robot_send_y;
-        public static double robot_send_z;
-        public static double robot_send_roll;
-        public static double robot_send_pitch;
-        public static double robot_send_yaw;
-
-        //向工作位置或停止位置运动时 发送的运动量
-        public static double robot_send_x1;             
-        public static double robot_send_y1;
-        public static double robot_send_z1;
-        public static double robot_send_roll1;
-        public static double robot_send_pitch1;
-        public static double robot_send_yaw1;
-
-        //工作位置或停止位置预设的位置数据
-        public static double robot_set_x;
-        public static double robot_set_y;
-        public static double robot_set_z;
-        public static double robot_set_roll;
-        public static double robot_set_pitch;
-        public static double robot_set_yaw;
-        public static int Port_Number;
-        public static TextBox MyTextBox;
-        public static TextBox MyTextBox2;
-        public static Button Mybutton1;
-        public static Button Mybutton3;
-        public static Button Mybutton4;
-        public static Button Mybutton5;
-        public static TrackBar Mytrackbar1;
-        public static TrackBar Mytrackbar2;
-        public static TrackBar Mytrackbar3;
-        public static TrackBar Mytrackbar4;
-        public static TrackBar Mytrackbar5;
-        public static TrackBar Mytrackbar6;
-        public static TrackBar Mytrackbar7;
-        public static CheckBox MycheckBox1;
-        public static CheckBox MycheckBox2;
-        public static ToolStripMenuItem My设置ToolStripMenuItem;
-        public static double Y_NOW;
-        public static double Z_NOW;
-        public static double PITCH_NOW;
-        public static double YAW_NOW;
-        public static double X_NOW;
-        public static double ROLL_NOW;
-        public static double L=0;
-
-        //固定位置速度变量
-        public static double movement_speed_position;
-        public static double movement_speed_posture;
-        public static bool st;
-
+    {        
         public Form1()
-        {
-
-            joystick = new JoyKeys.Voluntary.Joystick(JoyKeys.Voluntary.JoystickAPI.JOYSTICKID1);
-            joystick.Capture();
-            System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = false; //关闭外部修改UI程序后的合法性检查 
+        { 
+            System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = false; 
             InitializeComponent();
-            MyTextBox = this.textBox1; //使用外部变量指向UI工具
-            MyTextBox2 = this.textBox2;
-            Mybutton5 = this.button5;
-            Mybutton4 = this.button4;
-            Mybutton3 = this.button3;
-            
-            Mybutton1 = this.button1;
-            Mytrackbar1= this.trackBar1;
-            Mytrackbar2 = this.trackBar2;
-            Mytrackbar3 = this.trackBar3;
-            Mytrackbar4 = this.trackBar4;
-            Mytrackbar5 = this.trackBar5;
-            Mytrackbar6 = this.trackBar6;
-            Mytrackbar7 = this.trackBar7;
-            MycheckBox1 = this.checkBox1;
-            MycheckBox2 = this.checkBox2;
-
-            My设置ToolStripMenuItem = this.设置ToolStripMenuItem;
-            button1.Enabled = false;
-            
-            button3.Enabled = false;
-            button4.Enabled = false;
-            button5.Enabled = false;
-            //trackBar1.Enabled = false;
-            //trackBar2.Enabled = false;
-            //trackBar3.Enabled = false;
-            trackBar4.Enabled = false;
-            trackBar5.Enabled = false;
-            trackBar6.Enabled = false;
-            trackBar7.Enabled = false;
-            设置ToolStripMenuItem.Enabled = false;
-            textBox1.Text = "请选择控制模型...".ToString();
-            st = false;
         }
-        public void button1_Click(object sender, EventArgs e)
-        {
-            s1 = new Sensor();
-            s1.Start();
-            button1.Enabled = false;
-            checkBox1.Enabled= false;
-            checkBox2.Enabled = false;
-            textBox1.Text = "等待飞机连接...".ToString();
-            // Console.ReadKey();
-            timer1.Start();
-            
-        }
-        public void button3_Click(object sender, EventArgs e)
-        {
-            trackBar1.Value = 0;
-            trackBar2.Value = 0;
-            trackBar3.Value = 0;
-            trackBar4.Value = 0;
-            trackBar5.Value = 0;
-            trackBar6.Value = 0;
-            robot_send_x = trackBar1.Value;
-            robot_send_y = trackBar2.Value;
-            robot_send_z = trackBar3.Value;
-            robot_send_roll = trackBar4.Value;
-            robot_send_pitch = trackBar5.Value;
-            robot_send_yaw = trackBar6.Value;
-            Form1.get_initial_position = true;
-            Form1.Set_position = false;
-            textBox1.Text = "运动停止...".ToString();
-            
-            button4.Enabled = true;
-            button5.Enabled = true;
-            trackBar1.Enabled = true;
-            trackBar2.Enabled = true;
-            trackBar3.Enabled = true;
-            trackBar4.Enabled = true;
-            trackBar5.Enabled = true;
-            trackBar6.Enabled = true;
-            设置ToolStripMenuItem.Enabled = true;
+        //变量定义
+
+        public static EGMMotion IRBrobot ;
+        public static RobotTarget stop_position_4600 = new RobotTarget(990,0,1410);
+        public static RobotTarget stop_position_6650S = new RobotTarget(1956,0,1800,0,-10);
+        public static RobotTarget range_4600 = new RobotTarget(0, 1000,  1000,  15,  15,  15);
+        public static RobotTarget range_6650S = new RobotTarget(910, 490, 653, 0,  10,  15, 2000);
+        public static RobotTarget work_center_4600 = new RobotTarget(2180,0,500);
+        public static RobotTarget work_center_6650S = new RobotTarget(2480, 0, -200,0,30,0);
 
 
-        }
-        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        private void 选中IRB4600(object sender, EventArgs e)
         {
-            
-            System.Environment.Exit(0);
-        }
-        private void trackBar1_ValueChanged(object sender, EventArgs e)
-        {
-            if (Form1.Port_Number == 6510)
-            {
-                if (trackBar1.Value >= robot_4600range_x_max) { trackBar1.Value = robot_4600range_x_max; }
-                if (trackBar1.Value <= robot_4600range_x_min) { trackBar1.Value = robot_4600range_x_min; }
-
-            }
-            else
-            {
-                
-                if (trackBar1.Value >= robot_6650range_x_max) { trackBar1.Value = robot_6650range_x_max; }
-                if (trackBar1.Value <= robot_6650range_x_min) { trackBar1.Value = robot_6650range_x_min; }
-                
-            }
-            robot_send_x = trackBar1.Value;
-
-        }
-        private void trackBar2_ValueChanged(object sender, EventArgs e)
-        {
-            if (Form1.Port_Number == 6510)
-            {
-                if (trackBar2.Value >= robot_4600range_y_max) { trackBar2.Value = robot_4600range_y_max; }
-                if (trackBar2.Value <= robot_4600range_y_min) { trackBar2.Value = robot_4600range_y_min; }
-
-            }
-            else
-            { 
-                if (trackBar2.Value >= robot_6650range_y_max) { trackBar2.Value = robot_6650range_y_max; }
-                if (trackBar2.Value <= robot_6650range_y_min) { trackBar2.Value = robot_6650range_y_min; }
-            }
-            robot_send_y = trackBar2.Value;
-        }
-        private void trackBar3_ValueChanged(object sender, EventArgs e)
-        {
-            if (Form1.Port_Number == 6510)
-            {
-                if (trackBar3.Value >= robot_4600range_z_max) { trackBar3.Value = robot_4600range_z_max; }
-                if (trackBar3.Value <= robot_4600range_z_min) { trackBar3.Value = robot_4600range_z_min; }
-
-            }
-            else
-            {
-                if (trackBar3.Value >= robot_6650range_z_max) { trackBar3.Value = robot_6650range_z_max; }
-                if (trackBar3.Value <= robot_6650range_z_min) { trackBar3.Value = robot_6650range_z_min; }
-            }
-            robot_send_z = trackBar3.Value; 
-        }
-        private void trackBar4_ValueChanged(object sender, EventArgs e)
-        {
-            if (Form1.Port_Number == 6510)
-            {
-                if (trackBar4.Value >= robot_4600range_roll_max) { trackBar4.Value = robot_4600range_roll_max; }
-                if (trackBar4.Value <= robot_4600range_roll_min) { trackBar4.Value = robot_4600range_roll_min; }
-               
-            }
-            else
-            {
-                if (trackBar4.Value >= robot_6650range_roll_max) { trackBar4.Value = robot_6650range_roll_max; }
-                if (trackBar4.Value <= robot_6650range_roll_min) { trackBar4.Value = robot_6650range_roll_min; }
-
-            }
-            robot_send_roll = trackBar4.Value;
-        }
-        private void trackBar5_ValueChanged(object sender, EventArgs e)
-        {
-            if (Form1.Port_Number == 6510)
-            {
-                if (trackBar5.Value >= robot_4600range_pitch_max) { trackBar5.Value = robot_4600range_pitch_max; }
-                if (trackBar5.Value <= robot_4600range_pitch_min) { trackBar5.Value = robot_4600range_pitch_min; }
-
-            }
-            else
-            {
-                if (trackBar5.Value >= robot_6650range_pitch_max) { trackBar5.Value = robot_6650range_pitch_max; }
-                if (trackBar5.Value <= robot_6650range_pitch_min) { trackBar5.Value = robot_6650range_pitch_min; }
-            }
-            robot_send_pitch = trackBar5.Value;
-        }
-        private void trackBar6_ValueChanged(object sender, EventArgs e)
-        {
-            if (Form1.Port_Number == 6510)
-            {
-                if (trackBar6.Value >= robot_4600range_yaw_max) { trackBar6.Value = robot_4600range_yaw_max; }
-                if (trackBar6.Value <= robot_4600range_yaw_min) { trackBar6.Value = robot_4600range_yaw_min; }
-
-            }
-            else
-            {
-                if (trackBar6.Value >= robot_6650range_yaw_max) { trackBar6.Value = robot_6650range_yaw_max; }
-                if (trackBar6.Value <= robot_6650range_yaw_min) { trackBar6.Value = robot_6650range_yaw_min; }
-            }
-            robot_send_yaw = trackBar6.Value;
+            IRBrobot = new EGMMotion(6510, stop_position_4600, work_center_4600, range_4600, textBox2, textBox1);
+            textBox2.Text = DateTime.Now.Ticks.ToString(); 
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        private void 选中IRB6650S(object sender, EventArgs e)
         {
-            Form1.Port_Number = 6510;
-            button1.Enabled = true;
-            checkBox1.Enabled = false;
-            checkBox2.Enabled = false;
-            设置ToolStripMenuItem.Enabled = true;
-            trackBar7.Enabled = false;
-
-            textBox1.Text = "选择受油机(IRB4600)...".ToString();
-
-        }
-        private void checkBox2_CheckedChanged(object sender, EventArgs e)
-        {
-            Form1.Port_Number = 6511;
-            button1.Enabled = true;
-            checkBox1.Enabled = false;
-            checkBox2.Enabled = false;
-            设置ToolStripMenuItem.Enabled = true;
-            //trackBar1.Enabled = false;
-            //trackBar2.Enabled = false;
-            //trackBar3.Enabled = false;
-            //trackBar4.Enabled = false;
-
-
-            textBox1.Text = "选择加油机(IRB6650S)...".ToString();
-        }
-        private void button4_Click(object sender, EventArgs e)
-        {
-            textBox1.Text = "正在运动至工作位置...".ToString();
-            
-            button4.Enabled = false;
-            button5.Enabled = false;
-            trackBar1.Enabled= false;
-            trackBar2.Enabled = false;
-            trackBar3.Enabled = false;
-            trackBar4.Enabled = false;
-            trackBar5.Enabled = false;
-            trackBar6.Enabled = false;
-            trackBar7.Enabled = false;
-            设置ToolStripMenuItem.Enabled = false;
-            if (Form1.Port_Number == 6511)
-            {
-                movement_speed_position = set_movement_speed_position_6650S;
-                movement_speed_posture = set_movement_speed_posture_6650S;
-                Form1.robot_set_x = robot_set_x_6650;
-                Form1.robot_set_y = robot_set_y_6650;
-                Form1.robot_set_z = robot_set_z_6650;
-
-                Form1.robot_set_roll = 0;
-                Form1.robot_set_pitch = 30;
-                Form1.robot_set_yaw = 0;
-            }
-            else 
-            {
-                movement_speed_position = set_movement_speed_position_4600;
-                movement_speed_posture = set_movement_speed_posture_4600;
-                Form1.robot_set_x = robot_set_x_4600;
-                Form1.robot_set_y = robot_set_y_4600;
-                Form1.robot_set_z = robot_set_z_4600;
-                Form1.robot_set_roll = 0;
-                Form1.robot_set_pitch = 0;
-                Form1.robot_set_yaw = 0;
-            }
-            trackBar1.Value = 0;
-            trackBar2.Value = 0;
-            trackBar3.Value = 0;
-            trackBar4.Value = 0;
-            trackBar5.Value = 0;
-            trackBar6.Value = 0;
-            trackBar7.Value = 0;
-            robot_send_x = trackBar1.Value;
-            robot_send_y = trackBar2.Value;
-            robot_send_z = trackBar3.Value;
-            robot_send_roll = trackBar4.Value;
-            robot_send_pitch = trackBar5.Value;
-            robot_send_yaw = trackBar6.Value;
-            Set_position = true;
-        }
-        private void button5_Click(object sender, EventArgs e)
-        {
-            textBox1.Text = "正在运动至停机位置...".ToString();
-            
-            button4.Enabled = false;
-            button5.Enabled = false;
-            trackBar1.Enabled = false;
-            trackBar2.Enabled = false;
-            trackBar3.Enabled = false;
-            trackBar4.Enabled = false;
-            trackBar5.Enabled = false;
-            trackBar6.Enabled = false;
-            trackBar7.Enabled = false;
-            设置ToolStripMenuItem.Enabled = false;
-            if (Form1.Port_Number == 6511)
-            {
-                movement_speed_position = set_movement_speed_position_6650S;
-                movement_speed_posture = set_movement_speed_posture_6650S;
-                Form1.robot_set_x = 1956;
-                Form1.robot_set_y = 0;
-                Form1.robot_set_z = 1800;
-                Form1.robot_set_roll = 0;
-                Form1.robot_set_pitch = -10;
-                Form1.robot_set_yaw = 0;
-
-            }
-            else
-            {
-                movement_speed_position = set_movement_speed_position_4600;
-                movement_speed_posture = set_movement_speed_posture_4600;
-                Form1.robot_set_x = 990;
-                Form1.robot_set_y = 0;
-                Form1.robot_set_z = 1410;
-                Form1.robot_set_roll = 0;
-                Form1.robot_set_pitch = 0;
-                Form1.robot_set_yaw = 0;
-                
-            }
-            trackBar1.Value = 0;
-            trackBar2.Value = 0;
-            trackBar3.Value = 0;
-            trackBar4.Value = 0;
-            trackBar5.Value = 0;
-            trackBar6.Value = 0;
-            trackBar7.Value = 0;
-
-            robot_send_x = trackBar1.Value;
-            robot_send_y = trackBar2.Value;
-            robot_send_z = trackBar3.Value;
-            robot_send_roll = trackBar4.Value;
-            robot_send_pitch = trackBar5.Value;
-            robot_send_yaw = trackBar6.Value;
-            Set_position = true;
+            IRBrobot = new EGMMotion(6511, stop_position_6650S, work_center_6650S, range_6650S, textBox2, textBox1);
         }
 
-
-
-        private void 设置ToolStripMenuItem_Click_1(object sender, EventArgs e)
+        public void 启动(object sender, EventArgs e)
         {
-            Form f = new Form3();
-            f.Show();
+            IRBrobot.Start();
         }
 
-        private void 退出ToolStripMenuItem_Click_1(object sender, EventArgs e)
+        private void 刹车(object sender, EventArgs e)
         {
+            XBar.Value = 0;
+            YBar.Value = 0;
+            ZBar.Value = 0;
+            YawBar.Value = 0;
+            PitchBar.Value = 0;
+            RollBar.Value = 0;
+            LBar.Value = 0;
+            IRBrobot.Brake();
+
+        }
+
+        private void 关闭窗口(object sender, FormClosedEventArgs e)
+        {
+            if (IRBrobot != null) { IRBrobot.Stop(); }
             System.Environment.Exit(0);
         }
 
-        private void trackBar7_ValueChanged(object sender, EventArgs e)
+        private void 停机位置(object sender, EventArgs e)
         {
-
-            if (trackBar7.Value >= robot_6650range_L_max) { trackBar7.Value = robot_6650range_L_max; }
-            if (trackBar7.Value <= robot_6650range_L_min) { trackBar7.Value = robot_6650range_L_min; }
-
-            robot_send_x = trackBar7.Value * Math.Cos(robot_send_pitch) * Math.Cos(robot_send_yaw);
-            robot_send_y = -trackBar7.Value * Math.Cos(robot_send_pitch) * Math.Sin(robot_send_yaw);
-            robot_send_z = trackBar7.Value * Math.Sin(robot_send_pitch);
+            IRBrobot.GoToStopPosition();
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void 工作位置(object sender, EventArgs e)
         {
-            if (Form1.Port_Number == 6510 && st)
-            {
-                if (Form1.joystick.infoEx.dwYpos - 32760 < 0) //低头
-                {
-                    Form1.robot_send_pitch = -Form1.robot_4600range_pitch_max * (Form1.joystick.infoEx.dwYpos - 32767) / 32767;
-                    
-                    if (Z_NOW < robot_4600range_z_min * 1.1)
-                    {
-                        Form1.robot_send_z += (-0.1 * Form1.Z_speed_4600 * Form1.robot_send_pitch / Form1.robot_4600range_pitch_max) * (Z_NOW- robot_4600range_z_min) / (robot_4600range_z_min * 0.1);
-                    }
-                    else { Form1.robot_send_z += -0.1 * Form1.Z_speed_4600 * Form1.robot_send_pitch / Form1.robot_4600range_pitch_max; }
-                }
-
-                else if(Form1.joystick.infoEx.dwYpos - 32775 > 0) //仰头
-                { 
-                    Form1.robot_send_pitch = Form1.robot_4600range_pitch_min * (Form1.joystick.infoEx.dwYpos - 32767) / 32767;
-                    //Console.WriteLine(robot_4600range_z_max - Z_NOW);
-                    if (Z_NOW > robot_4600range_z_max * 0.9)
-                    {
-                         Form1.robot_send_z += (0.1 * Form1.Z_speed_4600 * Form1.robot_send_pitch / Form1.robot_4600range_pitch_min) * (robot_4600range_z_max - Z_NOW) / (robot_4600range_z_max * 0.1); 
-                    }
-                    else { Form1.robot_send_z += 0.1 * Form1.Z_speed_4600 * Form1.robot_send_pitch / Form1.robot_4600range_pitch_min; }
-
-                }
-
-                if (Form1.joystick.infoEx.dwXpos - 32760 < 0) //左偏
-                {
-                    Form1.robot_send_roll = -Form1.robot_4600range_roll_min * (Form1.joystick.infoEx.dwXpos - 32767) / 32767;
-                    if (Y_NOW > robot_4600range_y_max * 0.9)
-                    {
-                        Form1.robot_send_y += (0.1 * Form1.Y_speed_4600 * Form1.robot_send_roll / Form1.robot_4600range_roll_min)*(robot_4600range_y_max- Y_NOW)/ (robot_4600range_y_max*0.1);
-                    }
-                    else { Form1.robot_send_y += 0.1 * Form1.Y_speed_4600 * Form1.robot_send_roll / Form1.robot_4600range_roll_min; }
-                }
-                else if (Form1.joystick.infoEx.dwXpos - 32775 > 0) //右偏
-                {
-                    Form1.robot_send_roll = Form1.robot_4600range_roll_max * (Form1.joystick.infoEx.dwXpos - 32767) / 32767;
-                    if (Y_NOW < robot_4600range_y_min * 0.9)
-                    {
-                        Form1.robot_send_y += (-0.1 * Form1.Y_speed_4600 * Form1.robot_send_roll / Form1.robot_4600range_roll_max)*((Y_NOW- robot_4600range_y_min) /(-robot_4600range_y_min*0.1));
-                    }
-                    else { Form1.robot_send_y += -0.1 * Form1.Y_speed_4600 * Form1.robot_send_roll / Form1.robot_4600range_roll_max; }
-                }
-                
-
-                //位置限制，超过最大位置的90%进行限位
-            }
-            else if (Form1.Port_Number == 6511 && st)
-            {
-                if (Form1.joystick.infoEx.dwYpos - 32760 < 0) //低头
-                {
-                    
-                        Form1.robot_send_pitch += -0.1*Y_speed_6650S * (Form1.joystick.infoEx.dwYpos - 32767) / 32767;
-                    if (Form1.robot_send_pitch > robot_6650range_pitch_max) Form1.robot_send_pitch = robot_6650range_pitch_max;
-
-                }
-
-                else if (Form1.joystick.infoEx.dwYpos - 32775 > 0) //仰头
-                {
-                    Form1.robot_send_pitch += -0.1 * Y_speed_6650S * (Form1.joystick.infoEx.dwYpos - 32767) / 32767;
-                    if (Form1.robot_send_pitch < robot_6650range_pitch_min) Form1.robot_send_pitch = robot_6650range_pitch_min;
-                }
-                if (Form1.joystick.infoEx.dwXpos - 32760 < 0) //左偏
-                {
-                    Form1.robot_send_yaw += -0.1 * Z_speed_6650S * (Form1.joystick.infoEx.dwXpos - 32767) / 32767;
-                    if (Form1.robot_send_yaw > robot_6650range_yaw_max) Form1.robot_send_yaw = robot_6650range_yaw_max;
-                }
-                else if (Form1.joystick.infoEx.dwXpos - 32775 > 0) //右偏
-                {
-                    Form1.robot_send_yaw += -0.1 * Z_speed_6650S * (Form1.joystick.infoEx.dwXpos - 32767) / 32767;
-                    if (Form1.robot_send_yaw < robot_6650range_yaw_min) Form1.robot_send_yaw = robot_6650range_yaw_min;
-                }
-                if ((joystick.PreviousButtons & JoyKeys.Voluntary.JoystickButtons.B6) == JoyKeys.Voluntary.JoystickButtons.B6)
-                {
-                    //伸长
-                    L += 0.1* L_speed;
-                    if (L > robot_6650range_L_max) { L = robot_6650range_L_max; }
-
-                }
-                if ((joystick.PreviousButtons & JoyKeys.Voluntary.JoystickButtons.B5) == JoyKeys.Voluntary.JoystickButtons.B5)
-                {
-                    //缩短
-                    L -= 3;
-                    if (L < robot_6650range_L_min) { L = robot_6650range_L_min; }
-
-                }
-                robot_send_x  = L * Math.Cos(PITCH_NOW * Math.PI / 180) * Math.Cos(YAW_NOW * Math.PI / 180);
-                robot_send_y  = L * Math.Sin(YAW_NOW * Math.PI / 180) * Math.Cos(PITCH_NOW * Math.PI / 180);
-                robot_send_z  = -L * Math.Sin(PITCH_NOW * Math.PI / 180);
-            }
-            
+            IRBrobot.GoToWorkPosition();
         }
+
+        private void X轴运动(object sender, EventArgs e)
+        {
+            if (IRBrobot.robotchoice) IRBrobot.Sport_a.X = XBar.Value;
+        }
+
+        private void Y轴运动(object sender, EventArgs e)
+        {
+            if (IRBrobot.robotchoice) IRBrobot.Sport_a.Y = YBar.Value;
+        }
+
+        private void Z轴运动(object sender, EventArgs e)
+        {
+            if (IRBrobot.robotchoice) IRBrobot.Sport_a.Z = ZBar.Value;
+        }
+
+        private void 滚转运动(object sender, EventArgs e)
+        {
+            if(!IRBrobot.robotchoice) IRBrobot.Sport_x.ROLL = RollBar.Value;
+            else IRBrobot.Sport_a.ROLL = RollBar.Value;
+        }
+
+        private void 俯仰运动(object sender, EventArgs e)
+        {
+            if (!IRBrobot.robotchoice) IRBrobot.Sport_x.PITCH = PitchBar.Value;
+            else IRBrobot.Sport_a.PITCH = PitchBar.Value;
+        }
+
+        private void 偏航运动(object sender, EventArgs e)
+        {
+            if (!IRBrobot.robotchoice) IRBrobot.Sport_x.YAW = YawBar.Value;
+            else IRBrobot.Sport_a.YAW = YawBar.Value;
+        }
+
+        private void 加油杆长变化(object sender, EventArgs e)
+        {
+            if (!IRBrobot.robotchoice) IRBrobot.Sport_x.L = LBar.Value;
+        }
+
+        private void 定期刷新状态(object sender, EventArgs e)
+        {
+
+        }
+
     }
 
 
-     public class Sensor
+    /// </EGM运动>
+    public class EGMMotion
     {
-
-        public static int _ipPortNumber = Form1.Port_Number;
-        public static double robot_initial_x;
-        public static double robot_initial_y;
-        public static double robot_initial_z;
-        public static double robot_initial_roll;
-        public static double robot_initial_pitch;
-        public static double robot_initial_yaw;
-        public EgmRobot robot;
-
-
-
-
-        public bool st=false;
-        public static Thread _sensorThread = null;
-        private UdpClient _udpServer = null;
-        public static bool _exitThread = false;
-        private uint _seqNumber = 0;
-
-        public void SensorThread()
+        public EGMMotion(int ipPortNumber, RobotTarget stopposition, RobotTarget workposition, RobotTarget workrange,
+            TextBox datatext = null, TextBox prompttext = null)
         {
-            // create an udp client and listen on any address and the port _ipPortNumber
+            _ipPortNumber = ipPortNumber;
+            Stopposition = stopposition;
+            Workposition = workposition;
+            Sport_xmax = workrange;
+            DataText = datatext;
+            PromptMessage = prompttext;
+            Init(_ipPortNumber, T);
+        }
+
+        /// <summary>
+        /// 变量定义
+        /// </summary>
+        private Thread TimerThread = null;
+        private Thread WorkThread = null;
+        private Thread ReceiveThread = null;
+        private UdpClient _udpServer = null;
+        private static int _ipPortNumber;
+        private uint _seqNumber = 0;
+        private IPEndPoint remoteEP;
+        public int T=30;
+        public System.Timers.Timer aTimer;
+        public bool robotchoice;
+        private bool connection = false;
+        private bool brake = false;
+        public double speed_position=25;
+        public double speed_posture=2;
+        public double l_max_ratio = 0.8;
+        private static TextBox DataText, PromptMessage;
+        private RobotTarget Standard = new RobotTarget();
+        public RobotTarget Sport_a = new RobotTarget();
+        public RobotTarget Sport_v = new RobotTarget();
+        public RobotTarget Sport_vReal = new RobotTarget();
+        private RobotTarget Sport_vl = new RobotTarget(0,200,200,0.5,0.5,0.5);  //临时
+        private RobotTarget Sport_vmax = new RobotTarget(0,300,300,1,1,1);//临时
+        public RobotTarget Sport_x = new RobotTarget();
+        private RobotTarget Sport_xl = new RobotTarget();
+        private RobotTarget Sport_xmax = new RobotTarget();
+        public RobotTarget Receive = new RobotTarget();
+        private RobotTarget Stopposition = new RobotTarget();
+        private RobotTarget Workposition = new RobotTarget();
+
+
+        /// </summary>
+        /// 初始化
+        /// <param name="_ipPortNumber"></通信端口号>
+        /// <param name="CommuSpeed"></通信速度T>
+        /// <param name="speed_position"></XYZ方向在停机工作时单步移动步长>
+        /// <param name="speed_posture"></姿态角在停机工作时单步移动步长>
+        public void Init(int _ipPortNumber,int T)
+        {
             _udpServer = new UdpClient(_ipPortNumber);
-            var remoteEP = new IPEndPoint(IPAddress.Any, _ipPortNumber);
+            remoteEP = new IPEndPoint(IPAddress.Any, _ipPortNumber);
+            aTimer = new System.Timers.Timer{Interval = T}; 
+            if (_ipPortNumber == 6510) { robotchoice = true; }
+            else { robotchoice = false; }
+            //临时
+            Sport_xl.PITCH = Sport_xmax.PITCH*0.8; Sport_xl.YAW = Sport_xmax.YAW * 0.8; Sport_xl.ROLL = Sport_xmax.ROLL * 0.8;
+            Sport_xl.X = Sport_xmax.X * 0.5; Sport_xl.Y = Sport_xmax.Y * 0.5; Sport_xl.Z = Sport_xmax.Z * 0.5;
+        }
 
-           
-            while (_exitThread == false)
-            {
-                // get the message from robot
-                var data = _udpServer.Receive(ref remoteEP);  //接收机器人的位置信息
-                if (data != null)
-                {
-                    
-                    if (st == false)
-                    {
-
-                        st = true;
-                        Form1.MyTextBox.Text = "飞机已连接...".ToString();
-                        
-                        Form1.Mybutton3.Enabled = true;
-                        Form1.Mybutton4.Enabled = true;
-                        Form1.Mybutton5.Enabled = true;
-                        if (Form1.Port_Number == 6510)
-                        {
-                            Form1.Mytrackbar1.Enabled = true;
-                            Form1.Mytrackbar2.Enabled = true;
-                            Form1.Mytrackbar3.Enabled = true;
-                        }
-                        else 
-                        {
-                            Form1.Mytrackbar7.Enabled = true;
-                        }
-                        
-                        Form1.Mytrackbar4.Enabled = true;
-                        Form1.Mytrackbar5.Enabled = true;
-                        Form1.Mytrackbar6.Enabled = true;
-                    }
-                        
-                    // de-serialize inbound message from robot
-                    robot = EgmRobot.CreateBuilder().MergeFrom(data).Build(); //位置信息反序列化
-
-                    // display inbound message
-                    DisplayInboundMessage(robot); //显示当前位置信息并且第一次收到位置信息时，设置为初始点。后续控制都是在初始点上加偏移量
-
-                    // create a new outbound sensor message
-                    EgmSensor.Builder sensor = EgmSensor.CreateBuilder(); //创建给机器人的发送信息
-                    CreateSensorMessage(sensor);// 设置机器人下一步的运动信息
-                    Form1.st = true;
-                    using (MemoryStream memoryStream = new MemoryStream()) //序列化后发送给机器人
-                    {
-                        EgmSensor sensorMessage = sensor.Build();
-                        sensorMessage.WriteTo(memoryStream);
-                       // Console.WriteLine(sensorMessage.ToString());
-                        //send the udp message to the robot
-                        int bytesSent = _udpServer.Send(memoryStream.ToArray(),
-                                                       (int)memoryStream.Length, remoteEP);
-                        if (bytesSent < 0)
-                        {
-                            Console.WriteLine("Error send to robot");
-                            Form1.MyTextBox.Text = "飞机断开连接...".ToString();
-                        }
-                    }
-
-
-                }
-                
-                else 
-                {
-                    if (st)
-                    {
-                        st = false;
-                        Form1.MyTextBox.Text = "飞机断开连接...".ToString();
-                    }
-
-
-                }
-                
-            }
+        public void GoToStopPosition()
+        {
+            aTimer.Enabled = false;
+            if (TimerThread != null && TimerThread.ThreadState == ThreadState.Running) {  TimerThread.Abort();  }
+            if (ReceiveThread != null && ReceiveThread.ThreadState == ThreadState.Running) { ReceiveThread.Abort(); }
+            if (WorkThread != null && WorkThread.ThreadState == ThreadState.Running) { WorkThread.Abort(); }
+            WorkThread = new Thread(new ThreadStart(GoToStopPositionThread));
+            WorkThread.Start();
+            
             
         }
-
-        // Display message from robot
-        void DisplayInboundMessage(EgmRobot robot)
+        public void GoToWorkPosition()
         {
-            if (robot.HasHeader && robot.Header.HasSeqno && robot.Header.HasTm)
+            aTimer.Enabled = false;
+            if (TimerThread != null && TimerThread.ThreadState == ThreadState.Running) {  TimerThread.Abort();  }
+            if (ReceiveThread != null && ReceiveThread.ThreadState == ThreadState.Running) { ReceiveThread.Abort(); }
+            if (WorkThread != null && WorkThread.ThreadState == ThreadState.Running) { WorkThread.Abort(); }
+            WorkThread = new Thread(new ThreadStart(GoToWorkPositionThread));
+            WorkThread.Start();
+            
+            
+        }
+        private void GoToStopPositionThread()
+        {
+            brake = false;
+            if (robotchoice) //4600
             {
-                //Console.WriteLine("Seq={0} tm={1}\npos=\n{2}\nEuler=\n{3}",
-                //    robot.Header.Seqno.ToString(), robot.Header.Tm.ToString(), robot.FeedBack.Cartesian.Pos, robot.FeedBack.Cartesian.Euler);
-                string result = string.Format("X={0},Y={1},Z={2}\r\nRx={3},Ry={4},Rz={5}\r\nL={6}", Math.Round(robot.FeedBack.Cartesian.Pos.X,2), Math.Round(robot.FeedBack.Cartesian.Pos.Y,2), Math.Round(robot.FeedBack.Cartesian.Pos.Z,2), Math.Round(robot.FeedBack.Cartesian.Euler.X,2), Math.Round(robot.FeedBack.Cartesian.Euler.Y,2), Math.Round(robot.FeedBack.Cartesian.Euler.Z,2),Form1.L);
-                Form1.MyTextBox2.Text = result.ToString();
-                Form1.Z_NOW = robot.FeedBack.Cartesian.Pos.Z;
-                Form1.Y_NOW = robot.FeedBack.Cartesian.Pos.Y;
-                Form1.X_NOW = robot.FeedBack.Cartesian.Pos.X;
-                Form1.YAW_NOW = robot.FeedBack.Cartesian.Euler.Z;
-                Form1.PITCH_NOW = robot.FeedBack.Cartesian.Euler.Y;
-                Form1.ROLL_NOW = robot.FeedBack.Cartesian.Euler.X;
-                if (Form1.Set_position)
-                {
-
-                    robot_initial_yaw = robot.FeedBack.Cartesian.Euler.Z;
-                    robot_initial_pitch = robot.FeedBack.Cartesian.Euler.Y;
-                    robot_initial_roll = robot.FeedBack.Cartesian.Euler.X;
-                    robot_initial_x = robot.FeedBack.Cartesian.Pos.X;
-                    robot_initial_y = robot.FeedBack.Cartesian.Pos.Y;
-                    robot_initial_z = robot.FeedBack.Cartesian.Pos.Z;
-
-                    if (System.Math.Abs(robot.FeedBack.Cartesian.Euler.Z - Form1.robot_set_yaw) > Form1.movement_speed_posture) { Form1.robot_send_yaw1 = -Form1.movement_speed_posture * System.Math.Abs(robot.FeedBack.Cartesian.Euler.Z - Form1.robot_set_yaw) / (robot.FeedBack.Cartesian.Euler.Z - Form1.robot_set_yaw); }
-                    else { Form1.robot_send_yaw1 = Form1.robot_set_yaw-robot.FeedBack.Cartesian.Euler.Z  ; }
-                    if (System.Math.Abs(robot.FeedBack.Cartesian.Euler.Y - Form1.robot_set_pitch) > Form1.movement_speed_posture) { Form1.robot_send_pitch1 = -Form1.movement_speed_posture * System.Math.Abs(robot.FeedBack.Cartesian.Euler.Y - Form1.robot_set_pitch) / (robot.FeedBack.Cartesian.Euler.Y - Form1.robot_set_pitch); }
-                    else { Form1.robot_send_pitch1 = Form1.robot_set_pitch- robot.FeedBack.Cartesian.Euler.Y; }
-                    if (System.Math.Abs(robot.FeedBack.Cartesian.Euler.X - Form1.robot_set_roll) > Form1.movement_speed_posture) { Form1.robot_send_roll1 = -Form1.movement_speed_posture * System.Math.Abs(robot.FeedBack.Cartesian.Euler.X - Form1.robot_set_roll) / (robot.FeedBack.Cartesian.Euler.X - Form1.robot_set_roll); }
-                    else { Form1.robot_send_roll1 = Form1.robot_set_roll- robot.FeedBack.Cartesian.Euler.X; }
-                    if (System.Math.Abs(robot.FeedBack.Cartesian.Pos.X - Form1.robot_set_x) > Form1.movement_speed_position) { Form1.robot_send_x1 = (-System.Math.Abs(robot.FeedBack.Cartesian.Pos.X - Form1.robot_set_x) / (robot.FeedBack.Cartesian.Pos.X - Form1.robot_set_x)) * Form1.movement_speed_position; }
-                    else { Form1.robot_send_x1 = Form1.robot_set_x- robot.FeedBack.Cartesian.Pos.X; }
-                    if (System.Math.Abs(robot.FeedBack.Cartesian.Pos.Y - Form1.robot_set_y) > Form1.movement_speed_position) { Form1.robot_send_y1 = (-System.Math.Abs(robot.FeedBack.Cartesian.Pos.Y - Form1.robot_set_y) / (robot.FeedBack.Cartesian.Pos.Y - Form1.robot_set_y)) * Form1.movement_speed_position; }
-                    else { Form1.robot_send_y1 = Form1.robot_set_y- robot.FeedBack.Cartesian.Pos.Y; }
-                    if (System.Math.Abs(robot.FeedBack.Cartesian.Pos.Z - Form1.robot_set_z) > Form1.movement_speed_position) { Form1.robot_send_z1 = (-System.Math.Abs(robot.FeedBack.Cartesian.Pos.Z - Form1.robot_set_z) / (robot.FeedBack.Cartesian.Pos.Z - Form1.robot_set_z)) * Form1.movement_speed_position; }
-                    else { Form1.robot_send_z1 = Form1.robot_set_z- robot.FeedBack.Cartesian.Pos.Z; }
-                    if (System.Math.Abs(Form1.robot_send_x1)<=0.1 &&  System.Math.Abs(Form1.robot_send_y1)<=0.1 && System.Math.Abs(Form1.robot_send_z1)<=0.1 && System.Math.Abs(Form1.robot_send_yaw1) <=0.05 && System.Math.Abs(Form1.robot_send_pitch1) <=0.05 && System.Math.Abs(Form1.robot_send_roll1)  <= 0.05)
-                    {
-                        Form1.Set_position = false;
-                        robot_initial_yaw = robot.FeedBack.Cartesian.Euler.Z;
-                        robot_initial_pitch = robot.FeedBack.Cartesian.Euler.Y;
-                        robot_initial_roll = robot.FeedBack.Cartesian.Euler.X;
-                        robot_initial_x = robot.FeedBack.Cartesian.Pos.X;
-                        robot_initial_y = robot.FeedBack.Cartesian.Pos.Y;
-                        robot_initial_z = robot.FeedBack.Cartesian.Pos.Z;
-                        Form1.MyTextBox.Text = "运动到位...".ToString();
-                        Form1.Mybutton4.Enabled = true;
-                        Form1.Mybutton5.Enabled = true;
-                        Form1.Mytrackbar1.Enabled = true;
-                        Form1.Mytrackbar2.Enabled = true;
-                        Form1.Mytrackbar3.Enabled = true;
-                        Form1.Mytrackbar4.Enabled = true;
-                        Form1.Mytrackbar5.Enabled = true;
-                        Form1.Mytrackbar6.Enabled = true;
-                        Form1.Mytrackbar7.Enabled = true;
-                        Form1.My设置ToolStripMenuItem.Enabled = true;
-                    }
-                    
-
-                }
-
-                if (Form1.get_initial_position)
-                {
-                    Form1.get_initial_position = false;
-                    robot_initial_yaw = robot.FeedBack.Cartesian.Euler.Z;
-                    robot_initial_pitch = robot.FeedBack.Cartesian.Euler.Y;
-                    robot_initial_roll = robot.FeedBack.Cartesian.Euler.X;
-                    robot_initial_x = robot.FeedBack.Cartesian.Pos.X;
-                    robot_initial_y = robot.FeedBack.Cartesian.Pos.Y;
-                    robot_initial_z = robot.FeedBack.Cartesian.Pos.Z;
-                    
-
-
-                }
-
+                if (BackStop(Stopposition)) DisplayPrompt("受油机返回停机位置...");
+                else if(connection)DisplayPrompt("受油机刹车...");
             }
-            else
+            else //6650S
             {
-                Console.WriteLine("No header in robot message");
-                if (st)
-                {
-                    st = false;
-                    Form1.MyTextBox.Text = "飞机断开连接...".ToString();
-                }
+                GoWork(Workposition);
+                if (BackStop(Stopposition)) DisplayPrompt("加油机返回停机位置...");
+                else if (connection) DisplayPrompt("加油机刹车...");
             }
+            Start();
+            WorkThread.Abort();
+        }
+        private void GoToWorkPositionThread()
+        {
+            brake = false;
+            if (robotchoice) //4600
+            {
+                if (GoWork(Workposition))DisplayPrompt("受油机前往工作位置...");
+                else DisplayPrompt("受油机刹车..."); 
+            }
+            else //6650S
+            {
+                if (GoWork(Workposition)) DisplayPrompt("加油机前往工作位置...");
+                else DisplayPrompt("加油机刹车..."); 
+            }
+            Start();
+            WorkThread.Abort();
+            
+        }
+        private bool BackStop(RobotTarget stop)
+        {
+            RobotTarget send1 = new RobotTarget();
+            while (!brake&&connection)
+            {
+                Receive = DisplayRobotFeedbackPosition();
+                if (System.Math.Abs(Receive.PITCH - stop.PITCH) >= speed_posture)
+                { send1.PITCH = Sigmoid(stop.PITCH, Receive.PITCH) * speed_posture; }
+                else if (System.Math.Abs(Receive.PITCH - stop.PITCH) >= 0.1)
+                { send1.PITCH = stop.PITCH - Receive.PITCH; }
+                else { send1.PITCH = 0; break; }
+                SendSetPosition(Receive, send1);
+            }
+            while (!brake&&connection)
+            {
+                Receive = DisplayRobotFeedbackPosition();
+                Receive.PITCH = stop.PITCH;
+                if (System.Math.Abs(Receive.ROLL - stop.ROLL) >= speed_posture)
+                { send1.ROLL = Sigmoid(stop.ROLL, Receive.ROLL) * speed_posture; }
+                else if (System.Math.Abs(Receive.ROLL - stop.ROLL) >= 0.1)
+                { send1.ROLL = stop.ROLL - Receive.ROLL; }
+                else { send1.ROLL = 0; break; }
+                SendSetPosition(Receive, send1);
+            }
+            while (!brake&&connection)
+            {
+                Receive = DisplayRobotFeedbackPosition();
+                Receive.PITCH = stop.PITCH;
+                Receive.ROLL = stop.ROLL;
+                if (System.Math.Abs(Receive.YAW - stop.YAW) >= speed_posture)
+                { send1.YAW = Sigmoid(stop.YAW, Receive.YAW) * speed_posture; }
+                else if (System.Math.Abs(Receive.YAW - stop.YAW) >= 0.1)
+                { send1.YAW = stop.YAW - Receive.YAW; }
+                else { send1.YAW = 0; break; }
+                SendSetPosition(Receive, send1);
+            }
+            while (!brake&&connection)
+            {
+                Receive = DisplayRobotFeedbackPosition();
+                Receive.PITCH = stop.PITCH;
+                Receive.ROLL = stop.ROLL;
+                Receive.YAW = stop.YAW;
+                if (System.Math.Abs(Receive.Y - stop.Y) >= speed_position)
+                { send1.Y = Sigmoid(stop.Y, Receive.Y) * speed_position; }
+                else if (System.Math.Abs(Receive.Y - stop.Y) >= 0.05)
+                { send1.Y = stop.Y - Receive.Y; }
+                else { send1.Y = 0; break; }
+                SendSetPosition(Receive, send1);
+            }
+            while (!brake&&connection)
+            {
+                Receive = DisplayRobotFeedbackPosition();
+                Receive.PITCH = stop.PITCH;
+                Receive.ROLL = stop.ROLL;
+                Receive.YAW = stop.YAW;
+                Receive.Y = stop.Y;
+                if (System.Math.Abs(Receive.Z - stop.Z) >= speed_position)
+                { send1.Z = Sigmoid(stop.Z, Receive.Z) * speed_position; }
+                else if (System.Math.Abs(Receive.Z - stop.Z) >= 0.05)
+                { send1.Z = stop.Z - Receive.Z; }
+                else { send1.Z = 0; break; }
+                SendSetPosition(Receive, send1);
+            }
+            while (!brake&&connection)
+            {
+                Receive = DisplayRobotFeedbackPosition();
+                Receive.PITCH = stop.PITCH;
+                Receive.ROLL = stop.ROLL;
+                Receive.YAW = stop.YAW;
+                Receive.Y = stop.Y;
+                Receive.Z = stop.Z;
+                if (System.Math.Abs(Receive.X - stop.X) >= speed_position)
+                { send1.X = Sigmoid(stop.X, Receive.X) * speed_position; }
+                else if (System.Math.Abs(Receive.X - stop.X) >= 0.05)
+                { send1.X = stop.X - Receive.X; }
+                else { send1.X = 0; send1.BOOL0 = true; break; }
+                SendSetPosition(Receive, send1);
+            }
+            
+            return send1.BOOL0;
+        }
+        private bool GoWork(RobotTarget work)
+        {
+            RobotTarget send1 = new RobotTarget();
+            while (!brake && connection)
+            {
+                Receive = DisplayRobotFeedbackPosition();
+                if (System.Math.Abs(Receive.Y - work.Y) >= speed_position)
+                { send1.Y = Sigmoid(work.Y, Receive.Y) * speed_position; }
+                else if (System.Math.Abs(Receive.Y - work.Y) >= 0.05)
+                { send1.Y = work.Y - Receive.Y; }
+                else { send1.Y = 0; break; }
+                SendSetPosition(Receive, send1);
+            }
+            while (!brake && connection)
+            {
+                Receive = DisplayRobotFeedbackPosition();
+                Receive.Y = work.Y;
+                if (System.Math.Abs(Receive.X - work.X) >= speed_position)
+                { send1.X = Sigmoid(work.X, Receive.X) * speed_position; }
+                else if (System.Math.Abs(Receive.X - work.X) >= 0.05)
+                { send1.X = work.X - Receive.X; }
+                else { send1.X = 0; break; }
+                SendSetPosition(Receive, send1);
+            }
+            while (!brake && connection)
+            {
+                Receive = DisplayRobotFeedbackPosition();
+                Receive.Y = work.Y;
+                Receive.X = work.X;
+                if (System.Math.Abs(Receive.Z - work.Z) >= speed_position)
+                { send1.Z = Sigmoid(work.Z, Receive.Z) * speed_position; }
+                else if (System.Math.Abs(Receive.Z - work.Z) >= 0.05)
+                { send1.Z = work.Z - Receive.Z; }
+                else { send1.Z = 0;  break; }
+                SendSetPosition(Receive, send1);
+            }
+            while (!brake&&connection)
+            {
+                Receive.Y = work.Y;
+                Receive.X = work.X;
+                Receive.Z = work.Z;
+                Receive = DisplayRobotFeedbackPosition();
+                if (System.Math.Abs(Receive.PITCH - work.PITCH) >= speed_posture)
+                { send1.PITCH = Sigmoid(work.PITCH, Receive.PITCH) * speed_posture; }
+                else if (System.Math.Abs(Receive.PITCH - work.PITCH) >= 0.1)
+                { send1.PITCH = work.PITCH - Receive.PITCH ; }
+                else { send1.PITCH = 0; break; }
+                SendSetPosition(Receive, send1);
+            }
+            while (!brake&&connection)
+            {
+                Receive = DisplayRobotFeedbackPosition();
+                Receive.Y = work.Y;
+                Receive.X = work.X;
+                Receive.Z = work.Z;
+                Receive.PITCH = work.PITCH;
+                if (System.Math.Abs(Receive.ROLL - work.ROLL) >= speed_posture)
+                { send1.ROLL = Sigmoid(work.ROLL, Receive.ROLL) * speed_posture; }
+                else if (System.Math.Abs(Receive.ROLL - work.ROLL) >= 0.1)
+                { send1.ROLL = work.ROLL - Receive.ROLL;  }
+                else  { send1.ROLL = 0; break; }
+                SendSetPosition(Receive, send1);
+            }
+            while (!brake&&connection)
+            {
+                Receive = DisplayRobotFeedbackPosition();
+                Receive.Y = work.Y;
+                Receive.X = work.X;
+                Receive.Z = work.Z;
+                Receive.PITCH = work.PITCH;
+                Receive.ROLL = work.ROLL;
+                if (System.Math.Abs(Receive.YAW - work.YAW) >= speed_posture)
+                { send1.YAW = Sigmoid(work.YAW, Receive.YAW) * speed_posture; }
+                else if (System.Math.Abs(Receive.YAW - work.YAW) >= 0.1)
+                { send1.YAW = work.YAW - Receive.YAW; }
+                else{ send1.YAW = 0; send1.BOOL0 = true; break; }
+                SendSetPosition(Receive, send1);
+            }
+             
+            
+            return send1.BOOL0;
         }
 
-        //////////////////////////////////////////////////////////////////////////
-        // Create a sensor message to send to the robot
-        void CreateSensorMessage(EgmSensor.Builder sensor)
+        /// </主线程函数，启动定时器>
+        private void SensorThread()
         {
+            while (!WorkPositionInspection()) DisplayPrompt("飞机已连接,等待前往工作位置...");          
+            DisplayPrompt("飞机正在工作...");
+            Sport_x.Clear();
+            Sport_v.Clear();
+            Standard = DisplayRobotFeedbackPosition();
+            aTimer.Elapsed += new System.Timers.ElapsedEventHandler(OnTimedEvent);          
+            aTimer.Enabled = true;            
+        }
+
+        
+        private void OnTimedEvent(object sender, System.Timers.ElapsedEventArgs e)
+        {
+
+            
+            if(!brake&& connection&& robotchoice) IntegralA2X();
+            if (!brake && connection && !robotchoice)
+            {
+                Sport_x.X = Sport_x.L * Math.Cos(Sport_x.PITCH) * Math.Cos(Sport_x.ROLL);
+                Sport_x.Y = -Sport_x.L * Math.Cos(Sport_x.PITCH) * Math.Sin(Sport_x.ROLL);
+                Sport_x.Z = Sport_x.L * Math.Sin(Sport_x.PITCH);
+            }
+                SendSetPosition(Standard, Sport_x);
+
+
+        }
+        private void ReceiveData()
+        {while(true) DisplayRobotFeedbackPosition(); }
+
+
+        public bool WorkPositionInspection()
+        {
+            RobotTarget zero = new RobotTarget();
+            Receive = DisplayRobotFeedbackPosition();
+            if (System.Math.Abs(Receive.PITCH - Workposition.PITCH) < 1 && System.Math.Abs(Receive.YAW - Workposition.YAW) < 1 &&
+                System.Math.Abs(Receive.ROLL - Workposition.ROLL) < 1 && System.Math.Abs(Receive.X - Workposition.X) < 5 &&
+                System.Math.Abs(Receive.Y - Workposition.Y) < 5 && System.Math.Abs(Receive.Z - Workposition.Z) < 5) Workposition.BOOL0 = true;
+            else Workposition.BOOL0 = false;
+            SendSetPosition(Receive, zero);
+            return Workposition.BOOL0;
+        }
+        
+        
+        public RobotTarget DisplayRobotFeedbackPosition()
+        {           
+            var data = _udpServer.Receive(ref remoteEP);  //接收机器人的位置信息
+            EgmRobot robot = EgmRobot.CreateBuilder().MergeFrom(data).Build(); //位置信息反序列化
+            RobotTarget receive = new RobotTarget();           
+            if (data != null)
+            {
+                if (robot.RapidExecState.State == EgmRapidCtrlExecState.Types.RapidCtrlExecStateType.RAPID_RUNNING)
+                {
+                    
+                    receive.X = robot.FeedBack.Cartesian.Pos.X;
+                    receive.Y = robot.FeedBack.Cartesian.Pos.Y;
+                    receive.Z = robot.FeedBack.Cartesian.Pos.Z;
+                    receive.ROLL = robot.FeedBack.Cartesian.Euler.X;
+                    receive.PITCH = robot.FeedBack.Cartesian.Euler.Y;
+                    receive.YAW = robot.FeedBack.Cartesian.Euler.Z;
+                    string result = string.Format("X={0}\r\nY={1}\r\nZ={2}\r\nRx={3}\r\nRy={4}\r\nRz={5}\r\nX_v={6}\r\nY_v={7}\r\nZ_v={8}\r\nRx_v={9}\r\nRy_v={10}\r\nRz_v={11}\r\n",
+                        Math.Round(receive.X, 2), Math.Round(receive.Y, 2), Math.Round(receive.Z, 2),
+                        Math.Round(receive.ROLL, 2), Math.Round(receive.PITCH, 2), Math.Round(receive.YAW, 2),
+                        Math.Round(Sport_vReal.X, 2), Math.Round(Sport_vReal.Y, 2), Math.Round(Sport_vReal.Z, 2),
+                         Math.Round(Sport_vReal.ROLL, 2), Math.Round(Sport_vReal.PITCH, 2), Math.Round(Sport_vReal.YAW, 2));
+                    DisplayData(result);
+                    receive.BOOL0 = true;
+                    connection = true;
+                }
+                else 
+                {
+                    connection = false;
+                    receive.BOOL0 = false;
+                }
+            }
+              return receive;
+        }
+        
+        
+        public bool SendSetPosition( RobotTarget standard, RobotTarget send)
+        {
+            EgmSensor.Builder sensor = EgmSensor.CreateBuilder(); //创建给机器人的发送信息
             // create a header
             EgmHeader.Builder hdr = new EgmHeader.Builder();
             hdr.SetSeqno(_seqNumber++)
                 .SetTm((uint)DateTime.Now.Ticks)
                 .SetMtype(EgmHeader.Types.MessageType.MSGTYPE_CORRECTION);
-
-            sensor.SetHeader(hdr);
-
+            sensor.SetHeader(hdr);        
             // create some sensor data
             EgmPlanned.Builder planned = new EgmPlanned.Builder();
             EgmPose.Builder pos = new EgmPose.Builder();
-            EgmQuaternion.Builder pq = new EgmQuaternion.Builder();
             EgmCartesian.Builder pc = new EgmCartesian.Builder();
             EgmEuler.Builder po = new EgmEuler.Builder();
+            pc.SetX(standard.X+ send.X).SetY(standard.Y + send.Y).SetZ(standard.Z + send.Z);
+            po.SetX(standard.ROLL + send.ROLL).SetY(standard.PITCH + send.PITCH).SetZ(standard.YAW + send.YAW);
 
-            if (Form1.Set_position)
-            {
-                pc.SetX(robot_initial_x + Form1.robot_send_x1).SetY(robot_initial_y + Form1.robot_send_y1).SetZ(robot_initial_z + Form1.robot_send_z1);
-                po.SetX(robot_initial_roll+Form1.robot_send_roll1).SetY(robot_initial_pitch + Form1.robot_send_pitch1).SetZ(robot_initial_yaw + Form1.robot_send_yaw1);
-            }
-            else {
-                pc.SetX(robot_initial_x + Form1.robot_send_x).SetY(robot_initial_y + Form1.robot_send_y).SetZ(robot_initial_z + Form1.robot_send_z);
-                po.SetX(robot_initial_roll + Form1.robot_send_roll).SetY(robot_initial_pitch+Form1.robot_send_pitch).SetZ(robot_initial_yaw + Form1.robot_send_yaw);
-            }
-                
-
-            pos.SetPos(pc).SetEuler(po);
-         
+           //Console.WriteLine("{0};{1};{2}\n{3};{4};{5}\n", standard.X,standard.Y, standard.Z, send.X, send.Y, send.Z);
+            pos.SetPos(pc).SetEuler(po);       
             planned.SetCartesian(pos);  // bind pos object to planned
             sensor.SetPlanned(planned); // bind planned to sensor object
-
-            return;
+            using (MemoryStream memoryStream = new MemoryStream()) //序列化后发送给机器人
+            {
+                EgmSensor sensorMessage = sensor.Build();
+                sensorMessage.WriteTo(memoryStream);
+                // Console.WriteLine(sensorMessage.ToString());
+                //send the udp message to the robot
+                int bytesSent = _udpServer.Send(memoryStream.ToArray(),
+                                               (int)memoryStream.Length, remoteEP);
+                if (bytesSent < 0)
+                {
+                    send.BOOL0 = false;
+                }
+                else { send.BOOL0 = true; }
+            }
+            return send.BOOL0;
         }
 
-        // Start a thread to listen on inbound messages
+        public void Brake()
+        {
+            brake = true;
+            //if (WorkThread != null && WorkThread.ThreadState == ThreadState.Running) { brake=true; }
+            //if (TimerThread != null && TimerThread.ThreadState == ThreadState.Running) { brake = true; Sport_v.Clear(); Sport_a.Clear(); }
+        }
+
+        private void DisplayData(string str)
+        {
+            if (DataText != null) { DataText.Text = str.ToString(); }
+            else { Console.WriteLine(str); }
+        }
+        private void DisplayPrompt(string str)
+        {
+            if (PromptMessage != null) { PromptMessage.Text = str.ToString(); }
+            else { Console.WriteLine(str); }
+        }
+
+        
+        private int Sigmoid(double a, double b)
+        {
+            return (a > b) ? 1 : -1;
+        }
+
+        
         public void Start()
         {
-            _sensorThread = new Thread(new ThreadStart(SensorThread));
-            _sensorThread.Start();
-            
+            if (TimerThread == null || (WorkThread != null && WorkThread.ThreadState == ThreadState.Running))
+            {
+                TimerThread = new Thread(new ThreadStart(SensorThread));
+                TimerThread.Start();
+                ReceiveThread=new Thread(new ThreadStart(ReceiveData));
+                ReceiveThread.Start();
+            }
+            else { 
+                Sport_a.Clear();
+                Sport_v.Clear();
+                brake = false;
+            }
+        }
+        
+        public void Stop()
+        {            
+            if (TimerThread!=null && TimerThread.ThreadState == ThreadState.Running) { TimerThread.Abort();}
+            if (WorkThread!= null && WorkThread.ThreadState == ThreadState.Running) { WorkThread.Abort();}
+            Sport_x.Clear();
+            Sport_v.Clear();
         }
 
-
-        // Stop and exit thread
-        public void Stop()
+        private void IntegralA2X()
         {
+            SportStatus Vlimit = new SportStatus(Sport_v, Sport_vl);
+            SportStatus Xlimit = new SportStatus(Sport_x, Sport_xl);
+           //Console.WriteLine("{0}\n{1}\n", Vlimit.value_y, Xlimit.value_y);
+            Sport_v.PITCH = A2V(Vlimit.value_pitch,  Sport_a.PITCH, Sport_v.PITCH, Sport_x.PITCH,
+                Sport_vl.PITCH, Sport_vmax.PITCH);
+            RealVX PITCH = V2X(Xlimit.value_pitch, Sport_a.PITCH, Sport_v.PITCH, Sport_x.PITCH, Sport_xl.PITCH, Sport_xmax.PITCH);
+            Sport_vReal.PITCH = PITCH.v;
+            Sport_x.PITCH= PITCH.x;
+            if(PITCH.bool0) Sport_v.PITCH = PITCH.v;
+
+            Sport_v.YAW = A2V(Vlimit.value_yaw, Sport_a.YAW, Sport_v.YAW, Sport_x.YAW,Sport_vl.YAW, Sport_vmax.YAW);
+            RealVX YAW = V2X(Xlimit.value_yaw, Sport_a.YAW, Sport_v.YAW, Sport_x.YAW, Sport_xl.YAW, Sport_xmax.YAW);
+            Sport_vReal.YAW = YAW.v;
+            Sport_x.YAW = YAW.x;
+            if (YAW.bool0) Sport_v.YAW = YAW.v;
+
+            Sport_v.ROLL = A2V(Vlimit.value_roll, Sport_a.ROLL, Sport_v.ROLL, Sport_x.ROLL, Sport_vl.ROLL, Sport_vmax.ROLL);
+            RealVX ROLL = V2X(Xlimit.value_roll, Sport_a.ROLL, Sport_v.ROLL, Sport_x.ROLL, Sport_xl.ROLL, Sport_xmax.ROLL);
+            Sport_vReal.ROLL = ROLL.v;
+            Sport_x.ROLL = ROLL.x;
+            if (ROLL.bool0) Sport_v.ROLL = ROLL.v;
+
+            Sport_v.X = A2V(Vlimit.value_x, Sport_a.X, Sport_v.X, Sport_x.X, Sport_vl.X, Sport_vmax.X);
+            RealVX X = V2X(Xlimit.value_x, Sport_a.X, Sport_v.X, Sport_x.X, Sport_xl.X, Sport_xmax.X);
+            Sport_vReal.X = X.v;
+            Sport_x.X = X.x;
+            if (X.bool0) Sport_v.X = X.v;
+
+            Sport_v.Y = A2V(Vlimit.value_y, Sport_a.Y, Sport_v.Y, Sport_x.Y, Sport_vl.Y, Sport_vmax.Y);
+            RealVX Y = V2X(Xlimit.value_y, Sport_a.Y, Sport_v.Y, Sport_x.Y, Sport_xl.Y, Sport_xmax.Y);
+            Sport_vReal.Y = Y.v;
+            Sport_x.Y = Y.x;
+            if (Y.bool0) Sport_v.Y = Y.v;
+
+            Sport_v.Z = A2V(Vlimit.value_z, Sport_a.Z, Sport_v.Z, Sport_x.Z, Sport_vl.Z, Sport_vmax.Z);
+            RealVX Z = V2X(Xlimit.value_z, Sport_a.Z, Sport_v.Z, Sport_x.Z, Sport_xl.Z, Sport_xmax.Z);
+            Sport_vReal.Z = Z.v;
+            Sport_x.Z = Z.x;
+            if (Z.bool0) Sport_v.Z = Z.v;
+            Console.WriteLine("{0}\n{1}\n{2}\n{3}\n{4}\n", Xlimit.value_z, Sport_a.Z, Sport_v.Z, Sport_vReal.Z, Sport_x.Z);
+        }
+        private double A2V(int limitv,  double _a, double _v, double _x, double _vl, double _vmax)
+        {
+            _v += _a * T * 0.001;
+            double K = _vmax - _vl;
+            double _T = 2 / (K);
+            
+            if (limitv > 0 && _v > 0 )
+            {
+                    _v = K * (2.0 / (1.0 + System.Math.Exp(-_T * (System.Math.Abs(_v) - _vl))) - 1.0) + _vl;
+            }
+            else if (limitv < 0 && _v < 0 )
+            {     
+                    _v = -K * (2.0 / (1.0 + System.Math.Exp(-_T * (System.Math.Abs(_v) - _vl))) - 1.0) - _vl;
+            }
+
+            return _v;
+        }
+        private RealVX V2X(int limitx, double _a, double _v, double _x, double _xl, double _xmax)
+        {
+            RealVX vx = new RealVX();
+            vx.x = _v * T * 0.001+_x;
+            double K = _xmax - _xl;
+            double _T = 2 / (K);
+            vx.v = (vx.x - _x) / (T * 0.001);
+            if (limitx > 0 && _v > 0 )
+            {
+                
+                
+                vx.x = K * (2.0 / (1.0 + System.Math.Exp(-_T * (System.Math.Abs(vx.x) - _xl))) - 1.0) + _xl;
+                vx.v = (vx.x - _x) / (T * 0.001);
+
+                if (_a<0 && vx.v<0)
+                {
+                    vx.bool0 = true;
+                }
 
 
-            _exitThread = true;
-            _sensorThread.Abort();
+            }
+            else if (limitx < 0 && _v < 0)
+            {
+                vx.x = -K * (2.0 / (1.0 + System.Math.Exp(-_T * (System.Math.Abs(vx.x) - _xl))) - 1.0) - _xl;
+                vx.v = (vx.x - _x) / (T * 0.001);
+                if (_a > 0 && vx.v>0)
+                {
+                    vx.bool0 = true;
+                }
+
+            }
+
+            return vx;
+        }
+
+    }
+    // 机器人位置点
+    public class RobotTarget
+    {
+        public double X, Y, Z, ROLL, YAW, PITCH,L;
+        public bool BOOL0=false;
+
+        public RobotTarget(double x =0, double y =0, double z =0, double roll =0, double pitch =0, double yaw =0, double l =0)
+        {
+            X = x;Y = y;Z = z;ROLL = roll;PITCH = pitch;YAW = yaw; L = l;
+        }
+        public void Clear()
+        { X = 0; Y = 0; Z = 0; ROLL = 0; PITCH = 0; YAW = 0; L = 0; }
+    }
+    public class SportStatus
+    {
+
+        public int value_pitch, value_roll, value_yaw, value_x, value_y, value_z;
+        public SportStatus(RobotTarget x, RobotTarget xl )
+        {
+            if (x.PITCH > xl.PITCH) value_pitch = 1;
+            else if (x.PITCH < -xl.PITCH) value_pitch = -1;
+            else value_pitch = 0;
+
+            if (x.YAW > xl.YAW) value_yaw = 1;
+            else if (x.YAW < -xl.YAW) value_yaw = -1;
+            else value_yaw = 0;
+
+            if (x.ROLL > xl.ROLL) value_roll = 1;
+            else if (x.ROLL < -xl.ROLL) value_roll = -1;
+            else value_roll = 0;
+
+            if (x.X > xl.X) value_x = 1;
+            else if (x.X < -xl.X) value_x = -1;
+            else value_x = 0;
+
+            if (x.Y > xl.Y) value_y = 1;
+            else if (x.Y < -xl.Y) value_y = -1;
+            else value_y = 0;
+
+            if (x.Z > xl.Z) value_z = 1;
+            else if (x.Z < -xl.Z) value_z = -1;
+            else value_z = 0;
 
         }
     }
+    public class RealVX
+    {
+        public double v, x;
+        public bool bool0=false;
+    }
+
+
+
+
 
 }
+// 判断停机点
+//if (System.Math.Abs(Receive.PITCH - Stopposition.PITCH) < 1 && System.Math.Abs(Receive.YAW - Stopposition.YAW) < 1 &&
+//    System.Math.Abs(Receive.ROLL - Stopposition.ROLL) < 1 && System.Math.Abs(Receive.X - Stopposition.X) < 5 &&
+//    System.Math.Abs(Receive.Y - Stopposition.Y) < 5 && System.Math.Abs(Receive.Z - Stopposition.Z) < 5) Stopposition.BOOL0 = true;
+//else Stopposition.BOOL0 = false;
