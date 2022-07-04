@@ -1,0 +1,123 @@
+d:\documents\visual studio 2013\Projects\egm_move\egm_move\bin\Debug\egm_move.exe.config
+d:\documents\visual studio 2013\Projects\egm_move\egm_move\obj\Debug\egm_move.Form1.resources
+d:\documents\visual studio 2013\Projects\egm_move\egm_move\obj\Debug\egm_move.Properties.Resources.resources
+d:\documents\visual studio 2013\Projects\egm_move\egm_move\obj\Debug\egm_move.csproj.GenerateResource.Cache
+d:\documents\visual studio 2013\Projects\egm_move\egm_move\bin\Debug\egm_move.exe
+d:\documents\visual studio 2013\Projects\egm_move\egm_move\bin\Debug\egm_move.pdb
+d:\documents\visual studio 2013\Projects\egm_move\egm_move\bin\Debug\Google.ProtocolBuffers.dll
+d:\documents\visual studio 2013\Projects\egm_move\egm_move\bin\Debug\Google.ProtocolBuffers.Serialization.dll
+d:\documents\visual studio 2013\Projects\egm_move\egm_move\bin\Debug\Google.ProtocolBuffers.xml
+d:\documents\visual studio 2013\Projects\egm_move\egm_move\bin\Debug\Google.ProtocolBuffers.Serialization.xml
+d:\documents\visual studio 2013\Projects\egm_move\egm_move\obj\Debug\egm_move.exe
+d:\documents\visual studio 2013\Projects\egm_move\egm_move\obj\Debug\egm_move.pdb
+D:\Personal\Desktop\EGM\egm_move\egm_move\bin\Debug\egm_move.exe.config
+D:\Personal\Desktop\EGM\egm_move\egm_move\bin\Debug\egm_move.exe
+D:\Personal\Desktop\EGM\egm_move\egm_move\bin\Debug\egm_move.pdb
+D:\Personal\Desktop\EGM\egm_move\egm_move\bin\Debug\Google.ProtocolBuffers.dll
+D:\Personal\Desktop\EGM\egm_move\egm_move\bin\Debug\Google.ProtocolBuffers.Serialization.dll
+D:\Personal\Desktop\EGM\egm_move\egm_move\bin\Debug\Google.ProtocolBuffers.xml
+D:\Personal\Desktop\EGM\egm_move\egm_move\bin\Debug\Google.ProtocolBuffers.Serialization.xml
+D:\Personal\Desktop\EGM\egm_move\egm_move\obj\Debug\egm_move.Form1.resources
+D:\Personal\Desktop\EGM\egm_move\egm_move\obj\Debug\egm_move.Properties.Resources.resources
+D:\Personal\Desktop\EGM\egm_move\egm_move\obj\Debug\egm_move.csproj.GenerateResource.cache
+D:\Personal\Desktop\EGM\egm_move\egm_move\obj\Debug\egm_move.csproj.CoreCompileInputs.cache
+D:\Personal\Desktop\EGM\egm_move\egm_move\obj\Debug\egm_move.csproj.CopyComplete
+D:\Personal\Desktop\EGM\egm_move\egm_move\obj\Debug\egm_move.exe
+D:\Personal\Desktop\EGM\egm_move\egm_move\obj\Debug\egm_move.pdb
+D:\Personal\Desktop\EGM\egm_move\egm_move\obj\Debug\egm_move.csprojAssemblyReference.cache
+D:\Personal\Desktop\ABB机器人\EGM\egm_move\egm_move\bin\Debug\egm_move.exe.config
+D:\Personal\Desktop\ABB机器人\EGM\egm_move\egm_move\bin\Debug\egm_move.exe
+D:\Personal\Desktop\ABB机器人\EGM\egm_move\egm_move\bin\Debug\egm_move.pdb
+D:\Personal\Desktop\ABB机器人\EGM\egm_move\egm_move\bin\Debug\Google.ProtocolBuffers.dll
+D:\Personal\Desktop\ABB机器人\EGM\egm_move\egm_move\bin\Debug\Google.ProtocolBuffers.Serialization.dll
+D:\Personal\Desktop\ABB机器人\EGM\egm_move\egm_move\bin\Debug\Google.ProtocolBuffers.xml
+D:\Personal\Desktop\ABB机器人\EGM\egm_move\egm_move\bin\Debug\Google.ProtocolBuffers.Serialization.xml
+D:\Personal\Desktop\ABB机器人\EGM\egm_move\egm_move\obj\Debug\egm_move.csprojAssemblyReference.cache
+D:\Personal\Desktop\ABB机器人\EGM\egm_move\egm_move\obj\Debug\egm_move.Form1.resources
+D:\Personal\Desktop\ABB机器人\EGM\egm_move\egm_move\obj\Debug\egm_move.Properties.Resources.resources
+D:\Personal\Desktop\ABB机器人\EGM\egm_move\egm_move\obj\Debug\egm_move.csproj.GenerateResource.cache
+D:\Personal\Desktop\ABB机器人\EGM\egm_move\egm_move\obj\Debug\egm_move.csproj.CoreCompileInputs.cache
+D:\Personal\Desktop\ABB机器人\EGM\egm_move\egm_move\obj\Debug\egm_move.csproj.CopyComplete
+D:\Personal\Desktop\ABB机器人\EGM\egm_move\egm_move\obj\Debug\egm_move.exe
+D:\Personal\Desktop\ABB机器人\EGM\egm_move\egm_move\obj\Debug\egm_move.pdb
+D:\Personal\Desktop\ABB机器人\EGM\egm_move\egm_move\obj\Debug\egm_move.Form3.resources
+D:\Personal\Desktop\ABB机器人\EGM-P-Control\egm_move\egm_move\bin\Debug\egm_move.exe.config
+D:\Personal\Desktop\ABB机器人\EGM-P-Control\egm_move\egm_move\bin\Debug\egm_move.exe
+D:\Personal\Desktop\ABB机器人\EGM-P-Control\egm_move\egm_move\bin\Debug\egm_move.pdb
+D:\Personal\Desktop\ABB机器人\EGM-P-Control\egm_move\egm_move\bin\Debug\Google.ProtocolBuffers.dll
+D:\Personal\Desktop\ABB机器人\EGM-P-Control\egm_move\egm_move\bin\Debug\Google.ProtocolBuffers.Serialization.dll
+D:\Personal\Desktop\ABB机器人\EGM-P-Control\egm_move\egm_move\bin\Debug\Google.ProtocolBuffers.xml
+D:\Personal\Desktop\ABB机器人\EGM-P-Control\egm_move\egm_move\bin\Debug\Google.ProtocolBuffers.Serialization.xml
+D:\Personal\Desktop\ABB机器人\EGM-P-Control\egm_move\egm_move\obj\Debug\egm_move.csproj.AssemblyReference.cache
+D:\Personal\Desktop\ABB机器人\EGM-P-Control\egm_move\egm_move\obj\Debug\egm_move.Form1.resources
+D:\Personal\Desktop\ABB机器人\EGM-P-Control\egm_move\egm_move\obj\Debug\egm_move.Form3.resources
+D:\Personal\Desktop\ABB机器人\EGM-P-Control\egm_move\egm_move\obj\Debug\egm_move.Properties.Resources.resources
+D:\Personal\Desktop\ABB机器人\EGM-P-Control\egm_move\egm_move\obj\Debug\egm_move.csproj.GenerateResource.cache
+D:\Personal\Desktop\ABB机器人\EGM-P-Control\egm_move\egm_move\obj\Debug\egm_move.csproj.CoreCompileInputs.cache
+D:\Personal\Desktop\ABB机器人\EGM-P-Control\egm_move\egm_move\obj\Debug\egm_move.csproj.CopyComplete
+D:\Personal\Desktop\ABB机器人\EGM-P-Control\egm_move\egm_move\obj\Debug\egm_move.exe
+D:\Personal\Desktop\ABB机器人\EGM-P-Control\egm_move\egm_move\obj\Debug\egm_move.pdb
+F:\Git_Project\ABB机器人模拟飞行\abb-flight-simulation\EGM-P-Control\egm_move\bin\Debug\egm_move.exe.config
+F:\Git_Project\ABB机器人模拟飞行\abb-flight-simulation\EGM-P-Control\egm_move\bin\Debug\egm_move.exe
+F:\Git_Project\ABB机器人模拟飞行\abb-flight-simulation\EGM-P-Control\egm_move\bin\Debug\egm_move.pdb
+F:\Git_Project\ABB机器人模拟飞行\abb-flight-simulation\EGM-P-Control\egm_move\bin\Debug\Google.ProtocolBuffers.dll
+F:\Git_Project\ABB机器人模拟飞行\abb-flight-simulation\EGM-P-Control\egm_move\bin\Debug\Google.ProtocolBuffers.Serialization.dll
+F:\Git_Project\ABB机器人模拟飞行\abb-flight-simulation\EGM-P-Control\egm_move\bin\Debug\Google.ProtocolBuffers.xml
+F:\Git_Project\ABB机器人模拟飞行\abb-flight-simulation\EGM-P-Control\egm_move\bin\Debug\Google.ProtocolBuffers.Serialization.xml
+F:\Git_Project\ABB机器人模拟飞行\abb-flight-simulation\EGM-P-Control\egm_move\obj\Debug\egm_move.csproj.AssemblyReference.cache
+F:\Git_Project\ABB机器人模拟飞行\abb-flight-simulation\EGM-P-Control\egm_move\obj\Debug\egm_move.Form1.resources
+F:\Git_Project\ABB机器人模拟飞行\abb-flight-simulation\EGM-P-Control\egm_move\obj\Debug\egm_move.Form3.resources
+F:\Git_Project\ABB机器人模拟飞行\abb-flight-simulation\EGM-P-Control\egm_move\obj\Debug\egm_move.Properties.Resources.resources
+F:\Git_Project\ABB机器人模拟飞行\abb-flight-simulation\EGM-P-Control\egm_move\obj\Debug\egm_move.csproj.GenerateResource.cache
+F:\Git_Project\ABB机器人模拟飞行\abb-flight-simulation\EGM-P-Control\egm_move\obj\Debug\egm_move.csproj.CoreCompileInputs.cache
+F:\Git_Project\ABB机器人模拟飞行\abb-flight-simulation\EGM-P-Control\egm_move\obj\Debug\egm_move.csproj.CopyComplete
+F:\Git_Project\ABB机器人模拟飞行\abb-flight-simulation\EGM-P-Control\egm_move\obj\Debug\egm_move.exe
+F:\Git_Project\ABB机器人模拟飞行\abb-flight-simulation\EGM-P-Control\egm_move\obj\Debug\egm_move.pdb
+D:\Personal\Desktop\EGM-P-Control\egm_move\obj\Debug\egm_move.csproj.AssemblyReference.cache
+D:\Personal\Desktop\EGM-P-Control\egm_move\obj\Debug\egm_move.Form1.resources
+D:\Personal\Desktop\EGM-P-Control\egm_move\obj\Debug\egm_move.Form3.resources
+D:\Personal\Desktop\EGM-P-Control\egm_move\obj\Debug\egm_move.Properties.Resources.resources
+D:\Personal\Desktop\EGM-P-Control\egm_move\obj\Debug\egm_move.csproj.GenerateResource.cache
+D:\Personal\Desktop\EGM-P-Control\egm_move\obj\Debug\egm_move.csproj.CoreCompileInputs.cache
+D:\Personal\Desktop\EGM-P-Control\egm_move\obj\Debug\egm_move.exe
+D:\Personal\Desktop\EGM-P-Control\egm_move\obj\Debug\egm_move.pdb
+D:\Personal\Desktop\EGM-P-Control\egm_move\bin\Debug\egm_move.exe.config
+D:\Personal\Desktop\EGM-P-Control\egm_move\bin\Debug\egm_move.exe
+D:\Personal\Desktop\EGM-P-Control\egm_move\bin\Debug\egm_move.pdb
+D:\Personal\Desktop\EGM-P-Control\egm_move\bin\Debug\Google.ProtocolBuffers.dll
+D:\Personal\Desktop\EGM-P-Control\egm_move\bin\Debug\Google.ProtocolBuffers.Serialization.dll
+D:\Personal\Desktop\EGM-P-Control\egm_move\bin\Debug\Google.ProtocolBuffers.xml
+D:\Personal\Desktop\EGM-P-Control\egm_move\bin\Debug\Google.ProtocolBuffers.Serialization.xml
+D:\Personal\Desktop\EGM-P-Control\egm_move\obj\Debug\egm_move.csproj.CopyComplete
+D:\Personal\Desktop\JoystickC#代码\EGM-P-Control\egm_move\bin\Debug\egm_move.exe.config
+D:\Personal\Desktop\JoystickC#代码\EGM-P-Control\egm_move\bin\Debug\egm_move.exe
+D:\Personal\Desktop\JoystickC#代码\EGM-P-Control\egm_move\bin\Debug\egm_move.pdb
+D:\Personal\Desktop\JoystickC#代码\EGM-P-Control\egm_move\bin\Debug\Google.ProtocolBuffers.dll
+D:\Personal\Desktop\JoystickC#代码\EGM-P-Control\egm_move\bin\Debug\Google.ProtocolBuffers.Serialization.dll
+D:\Personal\Desktop\JoystickC#代码\EGM-P-Control\egm_move\bin\Debug\Google.ProtocolBuffers.xml
+D:\Personal\Desktop\JoystickC#代码\EGM-P-Control\egm_move\bin\Debug\Google.ProtocolBuffers.Serialization.xml
+D:\Personal\Desktop\JoystickC#代码\EGM-P-Control\egm_move\obj\Debug\egm_move.csproj.AssemblyReference.cache
+D:\Personal\Desktop\JoystickC#代码\EGM-P-Control\egm_move\obj\Debug\egm_move.Form1.resources
+D:\Personal\Desktop\JoystickC#代码\EGM-P-Control\egm_move\obj\Debug\egm_move.Form3.resources
+D:\Personal\Desktop\JoystickC#代码\EGM-P-Control\egm_move\obj\Debug\egm_move.Properties.Resources.resources
+D:\Personal\Desktop\JoystickC#代码\EGM-P-Control\egm_move\obj\Debug\egm_move.csproj.GenerateResource.cache
+D:\Personal\Desktop\JoystickC#代码\EGM-P-Control\egm_move\obj\Debug\egm_move.csproj.CoreCompileInputs.cache
+D:\Personal\Desktop\JoystickC#代码\EGM-P-Control\egm_move\obj\Debug\egm_move.csproj.CopyComplete
+D:\Personal\Desktop\JoystickC#代码\EGM-P-Control\egm_move\obj\Debug\egm_move.exe
+D:\Personal\Desktop\JoystickC#代码\EGM-P-Control\egm_move\obj\Debug\egm_move.pdb
+E:\Git Project\ABB机器人模拟飞行\abb-flight-simulation\EGM-P-Control\egm_move\bin\Debug\egm_move.exe.config
+E:\Git Project\ABB机器人模拟飞行\abb-flight-simulation\EGM-P-Control\egm_move\bin\Debug\egm_move.exe
+E:\Git Project\ABB机器人模拟飞行\abb-flight-simulation\EGM-P-Control\egm_move\bin\Debug\egm_move.pdb
+E:\Git Project\ABB机器人模拟飞行\abb-flight-simulation\EGM-P-Control\egm_move\bin\Debug\Google.ProtocolBuffers.dll
+E:\Git Project\ABB机器人模拟飞行\abb-flight-simulation\EGM-P-Control\egm_move\bin\Debug\Google.ProtocolBuffers.Serialization.dll
+E:\Git Project\ABB机器人模拟飞行\abb-flight-simulation\EGM-P-Control\egm_move\bin\Debug\Google.ProtocolBuffers.xml
+E:\Git Project\ABB机器人模拟飞行\abb-flight-simulation\EGM-P-Control\egm_move\bin\Debug\Google.ProtocolBuffers.Serialization.xml
+E:\Git Project\ABB机器人模拟飞行\abb-flight-simulation\EGM-P-Control\egm_move\obj\Debug\egm_move.csproj.AssemblyReference.cache
+E:\Git Project\ABB机器人模拟飞行\abb-flight-simulation\EGM-P-Control\egm_move\obj\Debug\egm_move.Form1.resources
+E:\Git Project\ABB机器人模拟飞行\abb-flight-simulation\EGM-P-Control\egm_move\obj\Debug\egm_move.Form3.resources
+E:\Git Project\ABB机器人模拟飞行\abb-flight-simulation\EGM-P-Control\egm_move\obj\Debug\egm_move.Properties.Resources.resources
+E:\Git Project\ABB机器人模拟飞行\abb-flight-simulation\EGM-P-Control\egm_move\obj\Debug\egm_move.csproj.GenerateResource.cache
+E:\Git Project\ABB机器人模拟飞行\abb-flight-simulation\EGM-P-Control\egm_move\obj\Debug\egm_move.csproj.CoreCompileInputs.cache
+E:\Git Project\ABB机器人模拟飞行\abb-flight-simulation\EGM-P-Control\egm_move\obj\Debug\egm_move.csproj.CopyComplete
+E:\Git Project\ABB机器人模拟飞行\abb-flight-simulation\EGM-P-Control\egm_move\obj\Debug\egm_move.exe
+E:\Git Project\ABB机器人模拟飞行\abb-flight-simulation\EGM-P-Control\egm_move\obj\Debug\egm_move.pdb
